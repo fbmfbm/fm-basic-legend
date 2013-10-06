@@ -21,3 +21,14 @@ body {
     line-height: 1;
     letter-spacing: -1px;
 }
+
+.fm-basic-legend{
+    margin: 10px auto 10px auto;
+    border: 1px solid #e3e3e3;
+    background-color: #f5f5f5;
+    border-radius: 3px;
+    padding: 10px;
+    max-width: 190px;
+    display: block;
+    font-size: 12px;
+}

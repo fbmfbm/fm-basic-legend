@@ -7,15 +7,17 @@ module.exports = function(config) {
     // base path, that will be used to resolve files and exclude
     basePath: '',
 
-
     // frameworks to use
     frameworks: ['jasmine'],
 
 
     // list of files / patterns to load in the browser
     files: [
+        '../bower_components/jquery/jquery.js',
         '../bower_components/angular/angular.js',
         '../bower_components/angular-mocks/angular-mocks.js',
+        '../bower_components/jquery/jquery.js',
+        "../scripts/jquery.xml2json.pack.js",
         'src/*.js',
         'test/spec/*.js'
     ],

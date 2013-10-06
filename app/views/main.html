@@ -1,20 +1,36 @@
 <div class="row">
-<div class="span6">
+<div class="col-md-6">
 	<div class="well">
 	  <h3>'fm-basic-legend module</h3>
 	  <p>Octobre 2014</p>
 	  <h4>Version 0.0.1</h4>
+	  <button ng-click="getMapInfo()" class="btn">get map info</button>
 	</div>
 	<div class="fbm-map-container">
-			<fm-basic-legend ></fm-basic-legend>
+			
 		</div>
 </div>
-<div class="span6">
+<div class="col-md-6">
 	<div class="well references">
 	  <h3>Références</h3>
 		<p><span class="label label-info">sld</span> : string (style sld reference)</p>
+		<p><span class="label label-info">title</span> : string (Title)</p>
+		<p><span class="label label-info">subtitle</span> : string (SubTitle)</p>
+		<p><span class="label label-info">comment</span> : string (Little comment)</p>
+		<p><span class="label label-info">sld-verion</span> : string (1.0.0/1.1.1 version du sld) default 1.1.0</p>
 	  <hr>
 	</div>
 </div>
 </div>
 <hr/>
+<div class="row">
+	<div class="col-md-5">
+		<fm-basic-legend sld="sldTest" title="Légende de test" subtitle="Sous titre de la légende" sld-version ="1.1.0"></fm-basic-legend>
+	</div>
+	<div class="col-md-7 well">
+		<h4>Map : </h4>
+				<fm-basic-wms divref="map1" map="thismap" width="100%" height="300px" map-layers="layerarray2" map-localisation="position1"  map-styles="" osm="yes" ></fm-basic-wms>
+
+	</div>
+</div>
+
