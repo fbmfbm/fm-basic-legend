@@ -52,7 +52,7 @@
 		    	$scope.isLoaded = false;
 		    	$scope.countLayers = [];
 
-		    	console.log($scope.mapLayers.length);
+		    	//console.log($scope.mapLayers.length);
 
 		    	
 		    	var element = angular.element('<div id="'+$scope.divref+'" class="fbm-map"></div><p class="">{{select}}</p>');
@@ -144,7 +144,7 @@
 				function layersWmsDataLoaded(event){
 
 					//console.log(event);
-					console.log(event.object.name +" est maintenant chargé et utilise le style : "+event.object.params.STYLES);
+					//console.log(event.object.name +" est maintenant chargé et utilise le style : "+event.object.params.STYLES);
 					var layerWork = $scope.map.getLayersByName(event.object.name);
 					var index = $scope.countLayers.indexOf(event.object.name);
 					$scope.countLayers.splice(index,1);

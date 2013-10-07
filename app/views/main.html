@@ -5,7 +5,9 @@
 	  <p>Octobre 2014</p>
 	  <h4>Version 0.0.1</h4>
 	  <button ng-click="getMapInfo()" class="btn">get map info</button>
+
 	</div>
+	<select class="form-control"  ng-model="selectedmap" ng-options="c.label for c in typeMap"></select>
 	<div class="fbm-map-container">
 			
 		</div>
@@ -18,6 +20,7 @@
 		<p><span class="label label-info">subtitle</span> : string (SubTitle)</p>
 		<p><span class="label label-info">comment</span> : string (Little comment)</p>
 		<p><span class="label label-info">sld-verion</span> : string (1.0.0/1.1.1 version du sld) default 1.1.0</p>
+		<p><span class="label label-info">legend-type</span> : string (type de la legende) default : Chorophlet <br> {chorophlet | symbole | circle}</p>
 	  <hr>
 	</div>
 </div>
@@ -25,7 +28,7 @@
 <hr/>
 <div class="row">
 	<div class="col-md-5">
-		<fm-basic-legend sld="sldTest" title="Légende de test" subtitle="Sous titre de la légende" sld-version ="1.1.0"></fm-basic-legend>
+		<fm-basic-legend sld="sldTest" legend-type="{{selectedmap.type}}" title="Légende de test" subtitle="Sous titre de la légende" sld-version ="1.1.0"></fm-basic-legend>
 	</div>
 	<div class="col-md-7 well">
 		<h4>Map : </h4>
