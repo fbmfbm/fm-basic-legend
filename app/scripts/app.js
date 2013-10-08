@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('fmBasicLegendApp', ['ngRoute', 'fm-basic-wms','fmBasicLegend'])
+angular.module('fmBasicLegendApp', ['ngRoute','fmNgSpinner', 'fm-basic-wms','fmBasicLegend'])
   .config(function ($routeProvider) {
     $routeProvider
       .when('/', {

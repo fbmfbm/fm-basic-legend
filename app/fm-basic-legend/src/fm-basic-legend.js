@@ -311,10 +311,19 @@
 								                        .style("stroke-width", 1.0);
 
 
+						var autherLine = svgContainer.append("line")
+									                        .attr("x1", decalageright+Number($scope.sldArray[i].size))
+									                        .attr("y1", decalageHeight+Number($scope.sldArray[i].size))
+									                        .attr("x2", Number(maxHeight)+decalageright+5)
+									                        .attr("y2",decalageHeight+($scope.sldArray[i].size*1))
+									                        .style("stroke", "#000000")
+									                        .style("stroke-width", 1.0);
+
+
 
 						var autherLabel = svgContainer.append("text")
-									                        .attr("x", (maxHeight*(1))+decalageright)
-									                        .attr("dy", decalageHeight+Number($scope.sldArray[i].size))
+									                        .attr("x", Number(maxHeight)+decalageright+8)
+									                        .attr("dy", 3+decalageHeight+Number($scope.sldArray[i].size))
 									                        .attr('text-anchor', 'start')
 									                        .text($scope.sldArray[i].title);
 

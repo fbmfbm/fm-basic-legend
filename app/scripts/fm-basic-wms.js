@@ -42,9 +42,8 @@
 		    	divref: "@divref",
 		    	mapwidth: "@width",
 		    	mapheight: "@height",
-		    	mapSld : "=",
-		    	//isLoaded : "=",
-		    	map: '='
+		    	mapSld : "="
+
 		    },
 		    //template: '<div id="{{divref}}" style="width: {{mapwidth}}; height: {{mapheight}}"></div>',
 		    link: function($scope, $elem, $attrs){
@@ -80,7 +79,7 @@
 
   				//////////////////////// build wms layer function ///////////////
 
-				var buildWMSLayer = function(l_name, l_serverUrl, l_layers, l_styles, l_opt_obj){
+				var buildWMSLayer = function(l_name, l_serverUrl, l_layers, l_styles, l_opt_obj, l_isWorkingLayer){
 
 				    
 
@@ -95,14 +94,22 @@
 				    wmsLayer.events.register('loadend',"", layersWmsDataLoaded);
 				    wmsLayer.events.register('loadstart',"", layersWmsLoad);
 
+				    if( l_isWorkingLayer == true){$scope.workinLayer = wmsLayer};
+
 				    return wmsLayer;
 				};
 				//////////////////////// end of build wms layer function ///////////////
 				//////////////////////// build layers stack function ///////////////
 				var buildLayerStack = function(layersDataArray){
 
+			
 					for (var i=0; i<layersDataArray.length;i++){
-						$scope.mapAllLayers.push(buildWMSLayer(layersDataArray[i].title,layersDataArray[i].serverUrl,layersDataArray[i].layerName,layersDataArray[i].style,layersDataArray[i].optObj));
+
+						$scope.mapAllLayers.push(buildWMSLayer(layersDataArray[i].title,layersDataArray[i].serverUrl,layersDataArray[i].layerName,layersDataArray[i].style,layersDataArray[i].optObj, layersDataArray[i].isWorkLayer));
+						//console.log("work : "+layersDataArray[i].isWorkLayer);
+						
+
+
 					}
 			
 				};
@@ -117,7 +124,6 @@
 
 			   			var osmLayer = new OpenLayers.Layer.OSM("Reliefs et réseaux", '',{attribution: ''});
 			   			$scope.mapAllLayers[0] = osmLayer;
-			   			
 			   		}
 
 			   		if($scope.mapLayers){
@@ -162,16 +168,17 @@
 		     	function init(){
 
 
-			     	$scope.map = new OpenLayers.Map({
-			   			div: $scope.divref,
-			   			projection:mercator,
-			   			layers: $scope.mapAllLayers,
-			   			controls: [
-			   				new OpenLayers.Control.Navigation(),
-        					new OpenLayers.Control.ArgParser(),
-        					new OpenLayers.Control.Attribution()
-			   			]
-			   		});
+				     	$scope.map = new OpenLayers.Map({
+				   			div: $scope.divref,
+				   			projection:mercator,
+				   			layers: $scope.mapAllLayers,
+				   			controls: [
+				   				new OpenLayers.Control.Navigation(),
+	        					new OpenLayers.Control.ArgParser(),
+	        					new OpenLayers.Control.Attribution()
+				   			]
+				   		});
+		     		
 
 			     	$scope.map.setCenter($scope.mapLocalisation.lonlat, $scope.mapLocalisation.zoom);
    	
@@ -181,6 +188,23 @@
 
 		     	preparMap();
 
+		     	//////////actualisation des données du calque work et mise à jour de la map ////////////
+
+		     	$scope.$watch("mapLayers",function(){
+
+		     		//buildLayerStack($scope.mapLayers);
+		     		var newLayersData;
+		     		for (var i=0; i<$scope.mapLayers.length;i++){
+		     			if($scope.mapLayers[i].title ==  $scope.workinLayer.name){newLayersData=$scope.mapLayers[i]};
+
+		     		}
+
+		     		console.log("Update du layer wms dans la directive : "+ $scope.workinLayer.name);
+		     		$scope.workinLayer.mergeNewParams({"STYLES": newLayersData.style});
+		     		console.log($scope.workinLayer.params);
+			
+
+		     	}, true);/// end watch mapLayers
 
 		    }
 		  }

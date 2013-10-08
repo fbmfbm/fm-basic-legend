@@ -8,7 +8,7 @@
 
 	</div>
 	<select class="form-control"  ng-model="selectedmap" ng-options="c.label for c in typeMap"></select>
-	<div class="fbm-map-container">
+	<div class="fbm-map-container" fm-ng-spinner="">
 			
 		</div>
 </div>
@@ -28,12 +28,11 @@
 <hr/>
 <div class="row">
 	<div class="col-md-5">
-		<fm-basic-legend sld="sldTest" legend-type="{{selectedmap.type}}" title="Légende de test" subtitle="Sous titre de la légende" sld-version ="1.1.0"></fm-basic-legend>
+		<fm-basic-legend sld="sldTest"  legend-type="{{selectedmap.type}}" title="Légende de test" subtitle="Sous titre de la légende" sld-version ="1.1.0"></fm-basic-legend>
 	</div>
 	<div class="col-md-7 well">
 		<h4>Map : </h4>
 				<fm-basic-wms divref="map1" map="thismap" width="100%" height="300px" map-layers="layerarray2" map-localisation="position1"  map-styles="" osm="yes" ></fm-basic-wms>
-
 	</div>
 </div>
 
