@@ -25,7 +25,7 @@
 
 	angular.module('fm-basic-wms').run(["$rootScope", function($rootScope){
 
-		$rootScope.fmBasicWmsVersion = "0.0.0.1";
+		$rootScope.fmBasicWmsVersion = "0.0.1";
 	}])
 
 	////////////////////////////////////////DIRECTIVE PRINCIPALE//////////////////////////////////////////
@@ -81,7 +81,7 @@
 
 				var buildWMSLayer = function(l_name, l_serverUrl, l_layers, l_styles, l_opt_obj, l_isWorkingLayer){
 
-				    
+				    if(typeof(l_isWorkingLayer)==='undefined') l_isWorkingLayer) = false;
 
 				    var wmsLayer = new OpenLayers.Layer.WMS(l_name, l_serverUrl,
 				        { layers : l_layers,
@@ -105,11 +105,8 @@
 			
 					for (var i=0; i<layersDataArray.length;i++){
 
-						$scope.mapAllLayers.push(buildWMSLayer(layersDataArray[i].title,layersDataArray[i].serverUrl,layersDataArray[i].layerName,layersDataArray[i].style,layersDataArray[i].optObj, layersDataArray[i].isWorkLayer));
+						$scope.mapAllLayers.push(buildWMSLayer(layersDataArray[i].title,layersDataArray[i].serverUrl,layersDataArray[i].layerName,layersDataArray[i].style,layersDataArray[i].optObj,layersDataArray[i].isWorkLayer));
 						//console.log("work : "+layersDataArray[i].isWorkLayer);
-						
-
-
 					}
 			
 				};
@@ -151,7 +148,7 @@
 
 					//console.log(event);
 					//console.log(event.object.name +" est maintenant chargé et utilise le style : "+event.object.params.STYLES);
-					var layerWork = $scope.map.getLayersByName(event.object.name);
+					var layerWork = $scope.map.getLayersByName(event.name);
 					var index = $scope.countLayers.indexOf(event.object.name);
 					$scope.countLayers.splice(index,1);
 					if($scope.countLayers.length == 0){
@@ -201,7 +198,7 @@
 
 		     		console.log("Update du layer wms dans la directive : "+ $scope.workinLayer.name);
 		     		$scope.workinLayer.mergeNewParams({"STYLES": newLayersData.style});
-		     		console.log($scope.workinLayer.params);
+		     		//console.log($scope.workinLayer.params);
 			
 
 		     	}, true);/// end watch mapLayers

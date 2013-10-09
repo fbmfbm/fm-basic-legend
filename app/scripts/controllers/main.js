@@ -61,7 +61,7 @@ angular.module('fmBasicLegendApp')
 
     $scope.getMapInfo = function(){
 
-        console.log("test");
+        console.log("Get map info");
     }
 
     $scope.$watch('selectedmap', function(){
@@ -73,9 +73,7 @@ angular.module('fmBasicLegendApp')
        buildLayerArray();
     });
 
-    $scope.$watch('layerarray2', function(){
-      console.log("Update du tab des Layers dans le controller");
-    })
+
 
 
 
