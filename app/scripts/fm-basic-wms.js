@@ -81,7 +81,7 @@
 
 				var buildWMSLayer = function(l_name, l_serverUrl, l_layers, l_styles, l_opt_obj, l_isWorkingLayer){
 
-				    if(typeof(l_isWorkingLayer)==='undefined') l_isWorkingLayer) = false;
+				    
 
 				    var wmsLayer = new OpenLayers.Layer.WMS(l_name, l_serverUrl,
 				        { layers : l_layers,
@@ -97,20 +97,23 @@
 				    if( l_isWorkingLayer == true){$scope.workinLayer = wmsLayer};
 
 				    return wmsLayer;
-				};
-				//////////////////////// end of build wms layer function ///////////////
+				};//-------- end of build wms layer function 
+
+				
 				//////////////////////// build layers stack function ///////////////
 				var buildLayerStack = function(layersDataArray){
 
 			
 					for (var i=0; i<layersDataArray.length;i++){
 
-						$scope.mapAllLayers.push(buildWMSLayer(layersDataArray[i].title,layersDataArray[i].serverUrl,layersDataArray[i].layerName,layersDataArray[i].style,layersDataArray[i].optObj,layersDataArray[i].isWorkLayer));
+						$scope.mapAllLayers.push(buildWMSLayer(layersDataArray[i].title,layersDataArray[i].serverUrl,layersDataArray[i].layerName,layersDataArray[i].style,layersDataArray[i].optObj, layersDataArray[i].isWorkLayer));
 						//console.log("work : "+layersDataArray[i].isWorkLayer);
+						
+
+
 					}
 			
-				};
-				//////////////////////// end of build layer stack function ///////////////	
+				};///---------------- end of build layer stack function ////
 
 				var preparMap = function(){
 
@@ -140,7 +143,36 @@
 					$scope.countLayers.push(event.object.name);
 
 					$scope.isLoaded = false;
+					/////----------SpinJs Options ------------------------
+					var opts = {
+							  lines: 13, // The number of lines to draw
+							  length: 8, // The length of each line
+							  width: 4, // The line thickness
+							  radius: 8, // The radius of the inner circle
+							  corners: 1, // Corner roundness (0..1)
+							  rotate: 0, // The rotation offset
+							  direction: 1, // 1: clockwise, -1: counterclockwise
+							  color: '#000', // #rgb or #rrggbb or array of colors
+							  speed: 1.5, // Rounds per second
+							  trail: 60, // Afterglow percentage
+							  shadow: false, // Whether to render a shadow
+							  hwaccel: false, // Whether to use hardware acceleration
+							  className: 'spinner', // The CSS class to assign to the spinner
+							  zIndex: 2e9, // The z-index (defaults to 2000000000)
+							  top: 'auto', // Top position relative to parent in px
+							  left: 'auto' // Left position relative to parent in px
+							};
 
+
+					if($scope.spinner==undefined){
+
+						var target = document.getElementById($scope.divref);
+						$scope.spinner = new Spinner(opts).spin(target);
+
+
+					}//-------end spinner start
+
+					
 				};
 				
 				
@@ -148,11 +180,17 @@
 
 					//console.log(event);
 					//console.log(event.object.name +" est maintenant chargé et utilise le style : "+event.object.params.STYLES);
-					var layerWork = $scope.map.getLayersByName(event.name);
+
+					var layerWork = $scope.map.getLayersByName(event.object.name);
 					var index = $scope.countLayers.indexOf(event.object.name);
+
 					$scope.countLayers.splice(index,1);
 					if($scope.countLayers.length == 0){
-						console.log("Tous les éléments sont maintenant chargés ");
+
+						//console.log("Tous les éléments sont maintenant chargés ");
+
+						$scope.spinner.stop();//-----all is loaded ? then stop the spin......
+						$scope.spinner = undefined;//------and remove it from the DOM
 						$scope.isLoaded = true;
 					}
 					
@@ -180,8 +218,7 @@
 			     	$scope.map.setCenter($scope.mapLocalisation.lonlat, $scope.mapLocalisation.zoom);
    	
 
-		     	}
-		     	//////////////////////////////Fin de l'initialisation de la carte ////////////
+		     	};//----------------Fin de l'initialisation de la carte ////////////
 
 		     	preparMap();
 
@@ -196,12 +233,14 @@
 
 		     		}
 
-		     		console.log("Update du layer wms dans la directive : "+ $scope.workinLayer.name);
+		     		//console.log("Update du layer wms dans la directive : "+ $scope.workinLayer.name);
 		     		$scope.workinLayer.mergeNewParams({"STYLES": newLayersData.style});
 		     		//console.log($scope.workinLayer.params);
 			
 
-		     	}, true);/// end watch mapLayers
+
+		     	}, true);///-------------- end watch mapLayers
+
 
 		    }
 		  }
