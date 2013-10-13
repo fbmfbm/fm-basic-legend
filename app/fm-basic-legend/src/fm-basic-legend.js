@@ -24,7 +24,7 @@
 
 	angular.module('fmBasicLegend').run(["$rootScope", function($rootScope){
 
-					$rootScope.fbmBasicLegendVersion = "0.0.0.1";
+					$rootScope.fbmBasicLegendVersion = "0.0.1";
 	}])
 
 	////////////////////////////////////////DIRECTIVE PRINCIPALE//////////////////////////////////////////

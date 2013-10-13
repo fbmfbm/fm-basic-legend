@@ -25,7 +25,7 @@
 
 	angular.module('fm-basic-wms').run(["$rootScope", function($rootScope){
 
-		$rootScope.fmBasicWmsVersion = "0.0.0.1";
+		$rootScope.fmBasicWmsVersion = "0.0.1";
 	}])
 
 	////////////////////////////////////////DIRECTIVE PRINCIPALE//////////////////////////////////////////
@@ -98,6 +98,7 @@
 
 				    return wmsLayer;
 				};//-------- end of build wms layer function 
+
 				//////////////////////// build layers stack function ///////////////
 				var buildLayerStack = function(layersDataArray){
 
@@ -178,11 +179,16 @@
 
 					//console.log(event);
 					//console.log(event.object.name +" est maintenant chargé et utilise le style : "+event.object.params.STYLES);
+
 					var layerWork = $scope.map.getLayersByName(event.object.name);
 					var index = $scope.countLayers.indexOf(event.object.name);
+
 					$scope.countLayers.splice(index,1);
 					if($scope.countLayers.length == 0){
-						console.log("Tous les éléments sont maintenant chargés ");
+
+
+						//console.log("Tous les éléments sont maintenant chargés ");
+
 
 						$scope.spinner.stop();//-----all is loaded ? then stop the spin......
 						$scope.spinner = undefined;//------and remove it from the DOM
@@ -228,12 +234,15 @@
 
 		     		}
 
-		     		console.log("Update du layer wms dans la directive : "+ $scope.workinLayer.name);
+		     		//console.log("Update du layer wms dans la directive : "+ $scope.workinLayer.name);
 		     		$scope.workinLayer.mergeNewParams({"STYLES": newLayersData.style});
-		     		console.log($scope.workinLayer.params);
+		     		//console.log($scope.workinLayer.params);
 			
 
+
+
 		     	}, true);///-------------- end watch mapLayers
+
 
 		    }
 		  }
