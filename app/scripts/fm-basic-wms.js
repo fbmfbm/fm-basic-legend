@@ -97,8 +97,7 @@
 				    if( l_isWorkingLayer == true){$scope.workinLayer = wmsLayer};
 
 				    return wmsLayer;
-				};
-				//////////////////////// end of build wms layer function ///////////////
+				};//-------- end of build wms layer function 
 				//////////////////////// build layers stack function ///////////////
 				var buildLayerStack = function(layersDataArray){
 
@@ -112,8 +111,7 @@
 
 					}
 			
-				};
-				//////////////////////// end of build layer stack function ///////////////	
+				};///---------------- end of build layer stack function ////
 
 				var preparMap = function(){
 
@@ -143,7 +141,36 @@
 					$scope.countLayers.push(event.object.name);
 
 					$scope.isLoaded = false;
+					/////----------SpinJs Options ------------------------
+					var opts = {
+							  lines: 13, // The number of lines to draw
+							  length: 8, // The length of each line
+							  width: 4, // The line thickness
+							  radius: 8, // The radius of the inner circle
+							  corners: 1, // Corner roundness (0..1)
+							  rotate: 0, // The rotation offset
+							  direction: 1, // 1: clockwise, -1: counterclockwise
+							  color: '#000', // #rgb or #rrggbb or array of colors
+							  speed: 1.5, // Rounds per second
+							  trail: 60, // Afterglow percentage
+							  shadow: false, // Whether to render a shadow
+							  hwaccel: false, // Whether to use hardware acceleration
+							  className: 'spinner', // The CSS class to assign to the spinner
+							  zIndex: 2e9, // The z-index (defaults to 2000000000)
+							  top: 'auto', // Top position relative to parent in px
+							  left: 'auto' // Left position relative to parent in px
+							};
 
+
+					if($scope.spinner==undefined){
+
+						var target = document.getElementById($scope.divref);
+						$scope.spinner = new Spinner(opts).spin(target);
+
+
+					}//-------end spinner start
+
+					
 				};
 				
 				
@@ -156,6 +183,9 @@
 					$scope.countLayers.splice(index,1);
 					if($scope.countLayers.length == 0){
 						console.log("Tous les éléments sont maintenant chargés ");
+
+						$scope.spinner.stop();//-----all is loaded ? then stop the spin......
+						$scope.spinner = undefined;//------and remove it from the DOM
 						$scope.isLoaded = true;
 					}
 					
@@ -183,8 +213,7 @@
 			     	$scope.map.setCenter($scope.mapLocalisation.lonlat, $scope.mapLocalisation.zoom);
    	
 
-		     	}
-		     	//////////////////////////////Fin de l'initialisation de la carte ////////////
+		     	};//----------------Fin de l'initialisation de la carte ////////////
 
 		     	preparMap();
 
@@ -204,7 +233,7 @@
 		     		console.log($scope.workinLayer.params);
 			
 
-		     	}, true);/// end watch mapLayers
+		     	}, true);///-------------- end watch mapLayers
 
 		    }
 		  }

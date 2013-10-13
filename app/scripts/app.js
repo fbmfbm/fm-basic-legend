@@ -1,7 +1,10 @@
 'use strict';
 
-angular.module('fmBasicLegendApp', ['ngRoute','fmNgSpinner', 'fm-basic-wms','fmBasicLegend'])
-  .config(function ($routeProvider) {
+angular.module('fmBasicLegendApp', ['ngRoute', 'fm-basic-wms','fmBasicLegend'])
+  .config(function ($routeProvider, $logProvider) {
+    $logProvider.debugEnabled(true);
+    //$logProvider.infoEnabled(false);
+    //$logProvider.warnEnabled(false);
     $routeProvider
       .when('/', {
         templateUrl: 'views/main.html',
@@ -10,4 +13,10 @@ angular.module('fmBasicLegendApp', ['ngRoute','fmNgSpinner', 'fm-basic-wms','fmB
       .otherwise({
         redirectTo: '/'
       });
+  });
+
+  angular.module('fmBasicLegendApp').run(function($rootScope, $log){
+
+    $rootScope.$log = $log;
+
   });

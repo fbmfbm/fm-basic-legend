@@ -35,11 +35,13 @@
 		    replace: false,
 		    //transclude: true,
 		    template : '<div id="legende1" class="fm-basic-legend"><div class="fm-basic-legend-title"><h5>{{title}}<h5></div>'+
+		    '<div>{{subtitle}}</div>'+
 		    '<div ng-show="showClass"  ng-repeat="class in sldArray | orderBy: \'id\':true" style="height: 25px;margin-bottom:5px; border-bottom:1px solid #FFF;" >'+
 		    '<div class="fm-bloc-class" style="display: block;float:left; margin-right: 5px; width:15px; height:15px; background-color:{{class.fillColor}};border: solid {{class.strokeWidth}}px {{class.strokeColor}};"></div>'+
 		    '<p style="display:block-inline;">{{class.title}}</p>'+
 		    '</div>'+//div class
 		    '<div id="svg-draw" ng-show="showCircle"></div>'+//div circleProp
+		    '<div >{{comment}}</div>'+//div Comment
 		    '</div>',//div globale
 		    scope : {
 		    	sld : "=",

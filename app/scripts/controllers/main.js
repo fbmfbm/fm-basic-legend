@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('fmBasicLegendApp')
-  .controller('MainCtrl', ['$scope', 'Sdl', function ($scope,Sdl) {
+  .controller('MainCtrl', ['$scope', 'Sdl','$rootScope', function ($scope,Sdl,$rootScope) {
 
     $scope.typeMap = [
       {label: "Carte Chorophlet", style:"fbm_pop1_orange", xmlSLD : "fbm_pop1_orange.xml", type:"chorophlet"},
@@ -12,7 +12,9 @@ angular.module('fmBasicLegendApp')
 
     $scope.selectedmap = $scope.typeMap[1];
 
-
+    //$rootScope.$log.info("Message d'info");
+    $rootScope.$log.debug("Message de debuggage");
+    //$rootScope.$log.warn("Message de niveau warm");
 
 
   	////////////////def map ///////////
