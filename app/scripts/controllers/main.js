@@ -6,24 +6,25 @@ angular.module('fmBasicLegendApp')
     $scope.typeMap = [
       {label: "Carte Chorophlet", style:"fbm_pop1_orange", xmlSLD : "fbm_pop1_orange.xml", type:"chorophlet"},
       {label: "Carte Degradée de cercles", style:"fbm_pop1_proport_rose", xmlSLD : "fbm_pop_circle.xml", type:"circle"},
-      {label: "Carte Proportionnelle", style:"fbm_pop1_proport2_rose", xmlSLD : "fbm_proportion1.xml", type:"symbole", isWorkLayer : "false", layerType : "wms"},
+      {label: "Carte Proportionnelle", style:"proportionnel_rouge", xmlSLD : "etab_test1.xml", type:"symbole", isWorkLayer : "false", layerType : "wms"},
+      // {label: "Carte Proportionnelle", style:"fbm_pop1_proport2_rose", xmlSLD : "fbm_proportion1.xml", type:"symbole", isWorkLayer : "false", layerType : "wms"},
       {label: "Carte Degrédée négatif de cercles", style:"fbm_pop1_proport2_rose", xmlSLD : "fbm_pop_circle_negatif.xml", type:"circle", isWorkLayer : "false", layerType : "wms"}
     ]
 
     $scope.selectedmap = $scope.typeMap[1];
 
     //$rootScope.$log.info("Message d'info");
-    $rootScope.$log.debug("Message de debuggage");
+    //$rootScope.$log.debug("Message de debuggage");
     //$rootScope.$log.warn("Message de niveau warm");
 
 
   	////////////////def map ///////////
-     var pos_bordeaux = new OpenLayers.LonLat("-38942.249144498", "5585455.9961036");
+    var pos_bordeaux = new OpenLayers.LonLat("-38942.249144498", "5585455.9961036");
 
           
-     var zoom_bordeaux = 8;
+    var zoom_bordeaux = 8;
 
-      $scope.position1 = {lonlat:pos_bordeaux,zoom:zoom_bordeaux};
+    $scope.position1 = {lonlat:pos_bordeaux,zoom:zoom_bordeaux};
 
 
     /////////////////////////////////////////////////////////////
@@ -52,10 +53,8 @@ angular.module('fmBasicLegendApp')
     //$scope.sld .getSld("sld_polygone1.xml").then(function(data){
     $scope.sld .getSld($scope.selectedmap.xmlSLD).then(function(data){
     	
-    	console.log("sldTest est ok");//data.data)
-    	$scope.sldTest = data.data;
-      
-        
+    	//console.log("sldTest est ok");//data.data)
+    	$scope.sldTest = data.data;    
 
     });
 

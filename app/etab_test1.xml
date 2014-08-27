@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<StyledLayerDescriptor xmlns="http://www.opengis.net/sld" xmlns:ogc="http://www.opengis.net/ogc" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.0.0" xmlns:xlink="http://www.w3.org/1999/xlink" >
+<NamedLayer>
+<Name>appg</Name>
+<UserStyle>
+<Name>ETPT_HAA_C10</Name>
+<FeatureTypeStyle>
+<Rule>
+<Name>effectifs privé</Name>
+<Description>
+<Title>effectifs privé</Title>
+</Description>
+<PointSymbolizer uom="http://www.opengeospatial.org/se/units/metre">
+<Graphic>
+<Mark>
+<WellKnownName>rectangle</WellKnownName>
+<Fill>
+<CssParameter name="fill">#c2d721</CssParameter>
+<CssParameter name="fill-opacity">0.74</CssParameter>
+</Fill>
+<Stroke>
+<CssParameter name="stroke">#809044</CssParameter>
+</Stroke>
+</Mark>
+<Size>
+<ogc:Function name="Interpolate">
+<!-- Property to transform -->
+<ogc:PropertyName>ETPT_HAA_C10</ogc:PropertyName>
+<!-- Mapping curve definition pairs (input, output) -->
+<ogc:Literal>0</ogc:Literal>
+<ogc:Literal>1</ogc:Literal>
+<ogc:Literal>10</ogc:Literal>
+<ogc:Literal>20</ogc:Literal>
+<ogc:Literal>50</ogc:Literal>
+<ogc:Literal>30</ogc:Literal>
+<ogc:Literal>500</ogc:Literal>
+<ogc:Literal>80</ogc:Literal>
+<!-- Interpolation mode - defaults to linear -->
+</ogc:Function>
+</Size>
+</Graphic>
+</PointSymbolizer>
+</Rule>
+</FeatureTypeStyle>
+</UserStyle>
+</NamedLayer>
+</StyledLayerDescriptor>  
